@@ -1,0 +1,651 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="description" content="Useful tips in a day by day linux job">
+    <meta name="keywords" content="">
+    <meta name="author" content="">
+    <meta name="generator" content="Hugo 0.52" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://ll.tips/css/style.css" type="text/css">
+    <link rel="stylesheet" href="https://ll.tips/css/style-code-pro.css" type="text/css">
+    <link rel="alternate" href="https://ll.tips/index.xml" type="application/rss+xml" title="ll tips">
+    <script src=https://ll.tips/js/jquery-1.12.3.min.js></script>
+    <script src=https://ll.tips/js/jquery.mobile.custom.min.js></script>
+    <script src=https://ll.tips/js/jquery-ui.min.js></script>
+    <script src=https://ll.tips/js/jquery.ui.touch-punch.min.js></script>
+    <script src=https://ll.tips/js/jquery.textfill.js></script>
+
+    <title>migrate percona master master 5.1 to 5.5 galera - ll tips</title>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script>
+      (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+      m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+      })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+      ga('create', 'UA-77382650-1', 'auto');
+      ga('send', 'pageview');
+
+    </script>
+  </head>
+<body>
+    <script src=https://ll.tips/js/main.js></script>
+
+<div class=blockcontain>
+<div id="terminal">
+<div id="scrollbarBase">
+  <div id="scrollbarDelta">
+    <span id="llist">l<br>i<br>s<br>t</span>
+    <span id="larticle">a<br>r<br>t<br>i<br>c<br>l<br>e</span>
+  </div>
+</div>
+<div id="scrollbar"></div>
+
+<div id="list" class="container">
+  <span class="caret">[me@blog]$</span>
+  <span class="command">ll tips</span>
+  <table class="listtb">
+    
+      
+        <tr class="listtb">
+          
+            <td class="listtb">-rxwrx-rx-</td>
+          
+          <td class="listtb">1</td>
+          <td class="listtb">me</td>
+          <td class="listtb">me</td>
+          <td class="listtb">5</td>
+          <td class="listtb">Feb</td>
+          <td class="listtb">24</td>
+          <td class="listtb">22:30</td>
+          <td class="listtb"><a class="path" href="https://ll.tips/llcat../">./</a></td>
+        </tr>
+      
+    
+      
+        <tr class="listtb">
+          
+            <td class="listtb">-rxwrx-rx-</td>
+          
+          <td class="listtb">1</td>
+          <td class="listtb">me</td>
+          <td class="listtb">me</td>
+          <td class="listtb">5</td>
+          <td class="listtb">Feb</td>
+          <td class="listtb">24</td>
+          <td class="listtb">22:30</td>
+          <td class="listtb"><a class="path" href="https://ll.tips/llcat.../">../</a></td>
+        </tr>
+      
+    
+      
+        <tr class="listtb">
+          
+            <td class="listtb">-r-wr--r--</td>
+          
+          <td class="listtb">1</td>
+          <td class="listtb">me</td>
+          <td class="listtb">me</td>
+          <td class="listtb">11</td>
+          <td class="listtb">Feb</td>
+          <td class="listtb">24</td>
+          <td class="listtb">22:30</td>
+          <td class="listtb"><a class="path" href="https://ll.tips/llcat.prefix-your-shell-command/">prefix your shell command</a></td>
+        </tr>
+      
+    
+      
+        <tr class="listtb">
+          
+            <td class="listtb">-r-wr--r--</td>
+          
+          <td class="listtb">1</td>
+          <td class="listtb">me</td>
+          <td class="listtb">me</td>
+          <td class="listtb">31</td>
+          <td class="listtb">Mar</td>
+          <td class="listtb">6</td>
+          <td class="listtb">18:32</td>
+          <td class="listtb"><a class="path" href="https://ll.tips/llcat.exit-with-a-error-from-vi/">exit with a error from vi</a></td>
+        </tr>
+      
+    
+      
+        <tr class="listtb">
+          
+            <td class="listtb">-r-wr--r--</td>
+          
+          <td class="listtb">1</td>
+          <td class="listtb">me</td>
+          <td class="listtb">me</td>
+          <td class="listtb">51</td>
+          <td class="listtb">Mar</td>
+          <td class="listtb">7</td>
+          <td class="listtb">23:38</td>
+          <td class="listtb"><a class="path" href="https://ll.tips/llcat.google-chrome-omnibox-custom-shortcut/">google chrome omnibox custom shortcuts</a></td>
+        </tr>
+      
+    
+      
+        <tr class="listtb">
+          
+            <td class="listtb">-r-wr--r--</td>
+          
+          <td class="listtb">1</td>
+          <td class="listtb">me</td>
+          <td class="listtb">me</td>
+          <td class="listtb">4</td>
+          <td class="listtb">Mar</td>
+          <td class="listtb">24</td>
+          <td class="listtb">12:09</td>
+          <td class="listtb"><a class="path" href="https://ll.tips/llcat.redirect-stderr-and-stdout-command-to-vi/">redirect stderr and stdout command to vi</a></td>
+        </tr>
+      
+    
+      
+        <tr class="listtb">
+          
+            <td class="listtb">-r-wr--r--</td>
+          
+          <td class="listtb">1</td>
+          <td class="listtb">me</td>
+          <td class="listtb">me</td>
+          <td class="listtb">48</td>
+          <td class="listtb">Mar</td>
+          <td class="listtb">24</td>
+          <td class="listtb">13:02</td>
+          <td class="listtb"><a class="path" href="https://ll.tips/llcat.install-a-missing-command-using-suggestions/">install a missing command using suggestions</a></td>
+        </tr>
+      
+    
+      
+        <tr class="listtb">
+          
+            <td class="listtb">-r-wr--r--</td>
+          
+          <td class="listtb">1</td>
+          <td class="listtb">me</td>
+          <td class="listtb">me</td>
+          <td class="listtb">5</td>
+          <td class="listtb">Apr</td>
+          <td class="listtb">26</td>
+          <td class="listtb">15:36</td>
+          <td class="listtb"><a class="path" href="https://ll.tips/llcat.show-special-characters-in-vi/">show special characters in vi</a></td>
+        </tr>
+      
+    
+      
+        <tr class="listtb">
+          
+            <td class="listtb">-r-wr--r--</td>
+          
+          <td class="listtb">1</td>
+          <td class="listtb">me</td>
+          <td class="listtb">me</td>
+          <td class="listtb">12</td>
+          <td class="listtb">Apr</td>
+          <td class="listtb">30</td>
+          <td class="listtb">17:38</td>
+          <td class="listtb"><a class="path" href="https://ll.tips/llcat.google-chrome-clear-dns-cache/">google chrome clear dns cache</a></td>
+        </tr>
+      
+    
+      
+        <tr class="listtb">
+          
+            <td class="listtb">-r-wr--r--</td>
+          
+          <td class="listtb">1</td>
+          <td class="listtb">me</td>
+          <td class="listtb">me</td>
+          <td class="listtb">44</td>
+          <td class="listtb">May</td>
+          <td class="listtb">5</td>
+          <td class="listtb">21:18</td>
+          <td class="listtb"><a class="path" href="https://ll.tips/llcat.translate-directly-in-google-chrome-omnibox/">translate directly in google chrome omnibox</a></td>
+        </tr>
+      
+    
+      
+        <tr class="listtb">
+          
+            <td class="listtb">-r-wr--r--</td>
+          
+          <td class="listtb">1</td>
+          <td class="listtb">me</td>
+          <td class="listtb">me</td>
+          <td class="listtb">140</td>
+          <td class="listtb">May</td>
+          <td class="listtb">8</td>
+          <td class="listtb">20:02</td>
+          <td class="listtb"><a class="path" href="https://ll.tips/llcat.manage-gnome-keyring-with-gkpass-script/">manage gnome keyring with gkpass script</a></td>
+        </tr>
+      
+    
+      
+        <tr class="listtb">
+          
+            <td class="listtb">-r-wr--r--</td>
+          
+          <td class="listtb">1</td>
+          <td class="listtb">me</td>
+          <td class="listtb">me</td>
+          <td class="listtb">6</td>
+          <td class="listtb">May</td>
+          <td class="listtb">22</td>
+          <td class="listtb">14:04</td>
+          <td class="listtb"><a class="path" href="https://ll.tips/llcat.test-internet-bandwidth-with-wget/">test internet bandwidth with wget</a></td>
+        </tr>
+      
+    
+      
+        <tr class="listtb">
+          
+            <td class="listtb">-r-wr--r--</td>
+          
+          <td class="listtb">1</td>
+          <td class="listtb">me</td>
+          <td class="listtb">me</td>
+          <td class="listtb">101</td>
+          <td class="listtb">Sep</td>
+          <td class="listtb">7</td>
+          <td class="listtb">09:17</td>
+          <td class="listtb"><a class="path" href="https://ll.tips/llcat.pgbench-postgresql-on-ubuntu-from-scratch/">pgbench postgresql on ubuntu from scratch</a></td>
+        </tr>
+      
+    
+      
+        <tr class="listtb">
+          
+            <td class="listtb">-r-wr--r--</td>
+          
+          <td class="listtb">1</td>
+          <td class="listtb">me</td>
+          <td class="listtb">me</td>
+          <td class="listtb">41</td>
+          <td class="listtb">Sep</td>
+          <td class="listtb">10</td>
+          <td class="listtb">11:31</td>
+          <td class="listtb"><a class="path" href="https://ll.tips/llcat.network-manager-strongswan-in-ubuntu-16.04/">network manager strongswan in ubuntu 16.04</a></td>
+        </tr>
+      
+    
+      
+        <tr class="listtb">
+          
+            <td class="listtb">-r-wr--r--</td>
+          
+          <td class="listtb">1</td>
+          <td class="listtb">me</td>
+          <td class="listtb">me</td>
+          <td class="listtb">557</td>
+          <td class="listtb">Dec</td>
+          <td class="listtb">12</td>
+          <td class="listtb">14:34</td>
+          <td class="listtb"><a class="path" href="https://ll.tips/llcat.migrate-percona-master-master-5.1-to-5.5-galera/">migrate percona master master 5.1 to 5.5 galera</a></td>
+        </tr>
+      
+    
+      
+        <tr class="listtb">
+          
+            <td class="listtb">-r-wr--r--</td>
+          
+          <td class="listtb">1</td>
+          <td class="listtb">me</td>
+          <td class="listtb">me</td>
+          <td class="listtb">71</td>
+          <td class="listtb">Mar</td>
+          <td class="listtb">20</td>
+          <td class="listtb">22:56</td>
+          <td class="listtb"><a class="path" href="https://ll.tips/llcat.install-docker-on-jessie-armhf/">install docker on jessie armhf</a></td>
+        </tr>
+      
+    
+      
+        <tr class="listtb">
+          
+            <td class="listtb">-r-wr--r--</td>
+          
+          <td class="listtb">1</td>
+          <td class="listtb">me</td>
+          <td class="listtb">me</td>
+          <td class="listtb">12</td>
+          <td class="listtb">May</td>
+          <td class="listtb">1</td>
+          <td class="listtb">15:45</td>
+          <td class="listtb"><a class="path" href="https://ll.tips/llcat.call-docker-api-using-curl-on-local-socket/">call docker api using curl on local socket</a></td>
+        </tr>
+      
+    
+      
+        <tr class="listtb">
+          
+            <td class="listtb">-r-wr--r--</td>
+          
+          <td class="listtb">1</td>
+          <td class="listtb">me</td>
+          <td class="listtb">me</td>
+          <td class="listtb">85</td>
+          <td class="listtb">May</td>
+          <td class="listtb">2</td>
+          <td class="listtb">23:10</td>
+          <td class="listtb"><a class="path" href="https://ll.tips/llcat.install-nomad-with-systemd/">install nomad with systemd</a></td>
+        </tr>
+      
+    
+      
+        <tr class="listtb">
+          
+            <td class="listtb">-r-wr--r--</td>
+          
+          <td class="listtb">1</td>
+          <td class="listtb">me</td>
+          <td class="listtb">me</td>
+          <td class="listtb">96</td>
+          <td class="listtb">Jun</td>
+          <td class="listtb">7</td>
+          <td class="listtb">19:22</td>
+          <td class="listtb"><a class="path" href="https://ll.tips/llcat.create-selfsigned-certificate-chrome-compatibile/">create selfsigned certificate chrome compatibile</a></td>
+        </tr>
+      
+    
+      
+        <tr class="listtb">
+          
+            <td class="listtb">-r-wr--r--</td>
+          
+          <td class="listtb">1</td>
+          <td class="listtb">me</td>
+          <td class="listtb">me</td>
+          <td class="listtb">24</td>
+          <td class="listtb">Nov</td>
+          <td class="listtb">2</td>
+          <td class="listtb">18:45</td>
+          <td class="listtb"><a class="path" href="https://ll.tips/llcat.enable-unity-editor-dark-mode-linux/">enable unity editor dark mode linux</a></td>
+        </tr>
+      
+    
+      
+        <tr class="listtb">
+          
+            <td class="listtb">-r-wr--r--</td>
+          
+          <td class="listtb">1</td>
+          <td class="listtb">me</td>
+          <td class="listtb">me</td>
+          <td class="listtb">29</td>
+          <td class="listtb">Nov</td>
+          <td class="listtb">5</td>
+          <td class="listtb">10:04</td>
+          <td class="listtb"><a class="path" href="https://ll.tips/llcat.disable-lutris-ssl-check/">disable lutris ssl check</a></td>
+        </tr>
+      
+    
+      
+        <tr class="listtb">
+          
+            <td class="listtb">-r-wr--r--</td>
+          
+          <td class="listtb">1</td>
+          <td class="listtb">me</td>
+          <td class="listtb">me</td>
+          <td class="listtb">54</td>
+          <td class="listtb">Dec</td>
+          <td class="listtb">28</td>
+          <td class="listtb">10:16</td>
+          <td class="listtb"><a class="path" href="https://ll.tips/llcat.forge-networking-build-from-source-nat-hole-punch/">forge networking build from source nat hole punch</a></td>
+        </tr>
+      
+    
+      
+        <tr class="listtb">
+          
+            <td class="listtb">-r-wr--r--</td>
+          
+          <td class="listtb">1</td>
+          <td class="listtb">me</td>
+          <td class="listtb">me</td>
+          <td class="listtb">62</td>
+          <td class="listtb">Dec</td>
+          <td class="listtb">28</td>
+          <td class="listtb">12:39</td>
+          <td class="listtb"><a class="path" href="https://ll.tips/llcat.forge-networking-create-nat-hole-systemd-unit/">forge networking create nat hole systemd unit</a></td>
+        </tr>
+      
+    
+      
+    
+  </table>
+  <div>
+  <span class="caret">[me@blog]$ </span>
+  
+    <span class="command">ll tips|llcat \</span>
+  
+  </div>
+</div>
+
+
+<div class="container" id="article">
+
+  <div class="command">\</div>
+  <div class="command">\</div>
+  <div class="command" id="title">"migrate percona master master 5.1 to 5.5 galera"</div>
+  <br>
+  
+
+<p>before start:</p>
+
+<ul>
+<li>in the source master-master all the databases must be in the innodb format since is the only supported storage engine for Galera cluster. If not, a conversion is needed.</li>
+<li>in the destination, three nodes with percona cluster 5.5 need to be installed and should be remain in stopped state. Ubuntu 14.04 is used in this scenario</li>
+</ul>
+
+<p>here below an example of my.cnf config, all the node must have the same config</p>
+
+<pre><code>[client]
+port            = 3306
+socket          = /var/run/mysqld/mysqld.sock
+[mysqld_safe]
+socket          = /var/run/mysqld/mysqld.sock
+nice            = 0
+[mysqld]
+symbolic-links            = 0
+log_slow_verbosity        = full
+slave_compressed_protocol = 1
+default_storage_engine = InnoDB
+log_slave_updates      = 1
+log_bin                = bin-log
+binlog_format          = ROW
+wsrep_provider=/usr/lib/libgalera_smm.so
+wsrep_on=ON
+wsrep_node_address=db01
+wsrep_provider_options=&quot;gcache.size=10240M; gmcast.segment=0&quot;
+wsrep_cluster_name=&quot;my_wsrep_cluster&quot;
+wsrep_cluster_address=gcomm://db01:4567,db02:4567,db03:4567
+wsrep_node_name=db01
+wsrep_node_incoming_address=
+wsrep_slave_threads=4
+wsrep_certify_nonPK=1
+wsrep_data_home_dir=
+wsrep_max_ws_rows=131072
+wsrep_max_ws_size=1073741824
+wsrep_debug=0
+wsrep_convert_LOCK_to_trx=0
+wsrep_retry_autocommit=1
+wsrep_auto_increment_control=1
+wsrep_drupal_282555_workaround=0
+wsrep_causal_reads=0
+wsrep_notify_cmd=
+wsrep_sst_method=xtrabackup-v2
+wsrep_sst_receive_address=
+wsrep_sst_auth=bkp_usr:bkp_psw
+innodb_flush_log_at_trx_commit = 2
+innodb_autoinc_lock_mode=2
+server_id=1
+sync_binlog=0
+innodb_read_io_threads=4
+innodb_write_io_threads=4
+user            = mysql
+pid-file        = /var/run/mysqld/mysqld.pid
+socket          = /var/run/mysqld/mysqld.sock
+port            = 3306
+basedir         = /usr
+datadir         = /var/lib/mysql
+tmpdir          = /tmp
+lc-messages-dir = /usr/share/mysql
+skip-external-locking
+key_buffer_size         = 16M
+max_allowed_packet      = 16M
+thread_stack            = 192K
+thread_cache_size       = 8
+query_cache_limit       = 1M
+query_cache_size        = 16M
+log_error = /var/log/mysql/error.log
+expire_logs_days        = 10
+max_binlog_size         = 100M
+[mysqldump]
+quick
+quote-names
+max_allowed_packet      = 16M
+!includedir /etc/mysql/conf.d/
+</code></pre>
+
+<p>take care that the following parameters must be unique</p>
+
+<pre><code>server-id=1
+wsrep_node_name=db01
+wsrep_node_address=db01
+</code></pre>
+
+<p>now we are ready to start
+backup the master (innobackupex come from percona-xtrabackup package)
+take note of the innodb_log_file parameters and master log positions</p>
+
+<pre><code>sudo innobackupex --user=cmon --password=psw /tmp/
+sudo innobackupex --apply-log /tmp
+</code></pre>
+
+<p>modify the destionation mysql config with the proposed innodb config
+here below is just an example</p>
+
+<pre><code>innodb_data_home_dir = ./
+innodb_data_file_path = ibdata1:10M:autoextend
+innodb_log_group_home_dir = ./
+innodb_log_files_in_group = 1
+innodb_log_file_size = 34855993344
+</code></pre>
+
+<p>restore to the data to one of the percona 5.5 nodes</p>
+
+<pre><code>sudo mkdir /var/lib/mysqlold
+sudo rsync -av /var/lib/mysql/ /var/lib/mysqlold/
+sudo rm -rf /var/lib/mysql/*
+sudo rsync -avcn -e ssh master1:/tmp/2016-11-08_22-39-19/ /var/lib/mysql/
+sudo chown mysql:mysql -R /var/lib/mysql
+</code></pre>
+
+<p>start first galera node</p>
+
+<pre><code>sudo /usr/sbin/mysqld --wsrep-new-cluster
+</code></pre>
+
+<p>now we have a galera cluster with just one node
+take the bin log coordinates before start the first connection between percona 5.1 and percona 5.5</p>
+
+<pre><code>cat xtrabackup_binlog_info
+</code></pre>
+
+<p>the output should be something like that</p>
+
+<pre><code>mysql-bin.000003        2504807
+</code></pre>
+
+<p>upgrade the schema</p>
+
+<pre><code>mysql_upgrade
+</code></pre>
+
+<p>if error <em>SQL: Error &lsquo;Cannot add or update a child row: a foreign key constraint Error_code: &hellip; 1452</em> is encountered and is not possible to correct it manually, consider to use slave-skip-error parameter as last chance becouse an inconsistency problem may occur</p>
+
+<pre><code>slave-skip-errors=1452
+</code></pre>
+
+<p>start first slave sync from the percona 5.1 node to the percona 5.5 galera node, remember to populate accordingly the value of <em>master_log_file</em> and <em>master_log_pos</em></p>
+
+<pre><code>slave stop;
+change master to master_host='dbsource01', master_user='cmon', master_password='psw', master_log_file = 'mysql-bin.000003', master_log_pos = 2504807; 
+slave start;
+</code></pre>
+
+<p>monitor the sync and wait until the seconds between master are zero</p>
+
+<pre><code>watch -n1 &quot;mysql -e 'show slave status \G' | grep -i second&quot;
+</code></pre>
+
+<p>connect to the others galera nodes and start mysql service</p>
+
+<pre><code>sudo service mysql start
+</code></pre>
+
+<p>if there are error verify wsrep_sst_auth user that have GRANT RELOAD, LOCK TABLES, REPLICATION permission and also check any dirty /var/lib/mysql/.sst data</p>
+
+<p>restart the first node without &ndash;wsrep-new-cluster</p>
+
+<pre><code>sudo service mysql stop
+sudo service mysql start
+</code></pre>
+
+<h2 id="troubleshooting">Troubleshooting</h2>
+
+<p>If error <em>Last_IO_Error: Got fatal error 1236 from master when reading data from binary log: &lsquo;Could not find first log file name in binary log index file&rsquo;</em> is encountered modify max_allowed_packet</p>
+
+<pre><code>show variables like 'max_allowed_packet';
+set global max_allowed_packet=33554432;
+</code></pre>
+
+  <div id=prompt>
+  <span class="caret">[me@blog]$</span>
+  <span id=underscore class="command"> _</span>
+  </div>
+</div>
+
+</div>
+</div>
+
+
+  <div class=blockcontain>
+  <div id=showComments>&#x2C5</div>
+  <div id=fakeComments>comments</div>
+<div id=comments>
+<div id="disqus_thread"></div>
+</div>
+</div>
+
+<script>
+
+
+
+var disqus_config = function () {
+    
+    this.page.identifier = "migrate percona master master 5.1 to 5.5 galera"; 
+};
+(function() { 
+    var d = document, s = d.createElement('script');
+    s.src = '//zergrushable.disqus.com/embed.js';
+    s.setAttribute('data-timestamp', +new Date());
+    (d.head || d.body).appendChild(s);
+})();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+
+
+
+</header>
+</body>
+</html>
+
+<script src=https://ll.tips/js/hacky-scrollbar-resize-listener.js></script>
+

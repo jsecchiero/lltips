@@ -1,0 +1,269 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>ll tips</title>
+    <link>https://ll.tips/</link>
+    <description>Recent content on ll tips</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Sat, 28 Dec 2019 12:39:21 +0000</lastBuildDate>
+    
+	<atom:link href="https://ll.tips/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>forge networking create nat hole systemd unit</title>
+      <link>https://ll.tips/llcat.forge-networking-create-nat-hole-systemd-unit/</link>
+      <pubDate>Sat, 28 Dec 2019 12:39:21 +0000</pubDate>
+      
+      <guid>https://ll.tips/llcat.forge-networking-create-nat-hole-systemd-unit/</guid>
+      <description>NatHolePunch.exe exit with [ERROR] FATAL UNHANDLED EXCEPTION: System.NullReferenceException: if don&amp;rsquo;t have any terminal attached and in the systemd unit is needed to specify StandardInput, TTYPath and optinally for see the logs StandardOutput.
+Here is an example, nathole is my unprivileged system user:
+# /etc/systemd/system/nathole.service [Unit] Description=Forge Networking Nat Hole Punch Server After=syslog.target network.target [Service] User=nathole Group=nathole Environment=&amp;quot;PATH=/home/nathole/bin:/usr/local/bin:/usr/bin:/bin:/usr/local/games:/usr/games:/snap/bin&amp;quot; ExecStart=/home/nathole/bin/NatHolePunch.exe WorkingDirectory=/home/nathole/bin StandardInput=tty TTYPath=/dev/tty2 StandardOutput=journal+console  </description>
+    </item>
+    
+    <item>
+      <title>forge networking build from source nat hole punch</title>
+      <link>https://ll.tips/llcat.forge-networking-build-from-source-nat-hole-punch/</link>
+      <pubDate>Sat, 28 Dec 2019 10:16:57 +0000</pubDate>
+      
+      <guid>https://ll.tips/llcat.forge-networking-build-from-source-nat-hole-punch/</guid>
+      <description>install mono
+download the repo
+git clone https://github.com/BeardedManStudios/ForgeNetworkingRemastered.git  replace copy command with cp
+sed -i &#39;s/copy /cp /g&#39; ForgeNetworkingCommon/ForgeNetworkingCommon.csproj sed -i &#39;s/copy /cp /g&#39; BeardedManStudios/BeardedManStudios.csproj  move source directory
+mv BeardedManStudios/Source BeardedManStudios/Source_old  create a sym link
+ln -s &amp;quot;`pwd`/Forge Networking Remastered Unity/Assets/Bearded Man Studios Inc/Scripts/Networking&amp;quot; &amp;quot;BeardedManStudios/Source&amp;quot;  compile!
+msbuild NatHolePunch  the executables are now in NatHolePunch/bin/Debug/</description>
+    </item>
+    
+    <item>
+      <title>disable lutris ssl check</title>
+      <link>https://ll.tips/llcat.disable-lutris-ssl-check/</link>
+      <pubDate>Tue, 05 Nov 2019 10:04:20 +0000</pubDate>
+      
+      <guid>https://ll.tips/llcat.disable-lutris-ssl-check/</guid>
+      <description>in ubuntu 19.10 and lutris 0.5.3 go under /usr/lib/python3/dist-packages/lutris/util/downloader.py in line 114
+replace this line
+ response = requests.get(self.url, headers=headers, stream=True)  with this line
+ response = requests.get(self.url, headers=headers, stream=True, verify=False)  </description>
+    </item>
+    
+    <item>
+      <title>enable unity editor dark mode linux</title>
+      <link>https://ll.tips/llcat.enable-unity-editor-dark-mode-linux/</link>
+      <pubDate>Sat, 02 Nov 2019 18:45:05 +0000</pubDate>
+      
+      <guid>https://ll.tips/llcat.enable-unity-editor-dark-mode-linux/</guid>
+      <description>in version 2019.2.11f1 edit the Unity binary with a hex editor
+74 02 8b 03 48 83  to
+75 02 8b 03 48 83  </description>
+    </item>
+    
+    <item>
+      <title>create selfsigned certificate chrome compatibile</title>
+      <link>https://ll.tips/llcat.create-selfsigned-certificate-chrome-compatibile/</link>
+      <pubDate>Fri, 07 Jun 2019 19:22:10 +0000</pubDate>
+      
+      <guid>https://ll.tips/llcat.create-selfsigned-certificate-chrome-compatibile/</guid>
+      <description>modify SITE var and run
+export SITE=yoursite.com openssl req \ -newkey rsa:2048 \ -x509 \ -nodes \ -keyout server.key \ -new \ -out server.crt \ -subj /CN=$SITE \ -reqexts SAN \ -extensions SAN \ -config &amp;lt;(cat /etc/ssl/openssl.cnf \ &amp;lt;(printf &amp;quot;[SAN]\nsubjectAltName=DNS:$SITE\n&amp;quot;) \ &amp;lt;(printf &amp;quot;basicConstraints=CA:true&amp;quot;)) \ -sha256 \ -days 3650  copy the certificate in your webserver or load balancer and import the server.crt locally so the browser can recognize it
+certutil -d sql:$HOME/.</description>
+    </item>
+    
+    <item>
+      <title>install nomad with systemd</title>
+      <link>https://ll.tips/llcat.install-nomad-with-systemd/</link>
+      <pubDate>Tue, 02 May 2017 23:10:06 +0200</pubDate>
+      
+      <guid>https://ll.tips/llcat.install-nomad-with-systemd/</guid>
+      <description>NOMAD_VERSION=0.5.6 ARCH=amd64 apt-get install unzip -y wget https://releases.hashicorp.com/nomad/${NOMAD_VERSION}/nomad_${NOMAD_VERSION}_linux_${ARCH}.zip -O /tmp/nomad.zip cd /usr/bin unzip -o /tmp/nomad.zip chmod +x /usr/bin/nomad rm /tmp/nomad.zip wget https://raw.githubusercontent.com/hashicorp/nomad/master/dist/systemd/nomad.service -O /etc/systemd/system/nomad.service systemctl enable nomad  for arm change ARCH to arm
+ARCH=arm  put you config file to /etc/nomad and start the service
+cat &amp;gt; /etc/nomad &amp;lt;&amp;lt;&#39;EOF&#39; bind_addr = &amp;quot;0.0.0.0&amp;quot; log_level = &amp;quot;DEBUG&amp;quot; data_dir = &amp;quot;/var/lib/nomad&amp;quot; client { enabled = true servers = [&amp;quot;nomad.home:4647&amp;quot;] options { &amp;quot;driver.raw_exec.enable&amp;quot; = &amp;quot;1&amp;quot; } } server { enabled = true bootstrap_expect = 1 } EOF service nomad start  </description>
+    </item>
+    
+    <item>
+      <title>call docker api using curl on local socket</title>
+      <link>https://ll.tips/llcat.call-docker-api-using-curl-on-local-socket/</link>
+      <pubDate>Mon, 01 May 2017 15:45:15 +0200</pubDate>
+      
+      <guid>https://ll.tips/llcat.call-docker-api-using-curl-on-local-socket/</guid>
+      <description>alias curl=&amp;quot;docker run --rm -v /var/run/docker.sock:/var/run/docker.sock jsecchiero/curl curl&amp;quot; curl --unix-socket /var/run/docker.sock http://localhost/containers/json  </description>
+    </item>
+    
+    <item>
+      <title>install docker on jessie armhf</title>
+      <link>https://ll.tips/llcat.install-docker-on-jessie-armhf/</link>
+      <pubDate>Mon, 20 Mar 2017 22:56:01 +0100</pubDate>
+      
+      <guid>https://ll.tips/llcat.install-docker-on-jessie-armhf/</guid>
+      <description>this guide is a little modification of official docker installation
+Install packages to allow apt to use repository over HTTPS:
+sudo apt-get install \ apt-transport-https \ ca-certificates \ curl \ software-properties-common  Add Docker&amp;rsquo;s official GPG key:
+curl -fsSL https://download.docker.com/linux/debian/gpg | sudo apt-key add -  Set up docker respoistory
+sudo add-apt-repository \ &amp;quot;deb [arch=armhf] https://download.docker.com/linux/debian \ $(lsb_release -cs) \ stable&amp;quot;  Update package index
+sudo apt-get update  Install docker</description>
+    </item>
+    
+    <item>
+      <title>migrate percona master master 5.1 to 5.5 galera</title>
+      <link>https://ll.tips/llcat.migrate-percona-master-master-5.1-to-5.5-galera/</link>
+      <pubDate>Mon, 12 Dec 2016 14:34:29 +0100</pubDate>
+      
+      <guid>https://ll.tips/llcat.migrate-percona-master-master-5.1-to-5.5-galera/</guid>
+      <description>before start:
+ in the source master-master all the databases must be in the innodb format since is the only supported storage engine for Galera cluster. If not, a conversion is needed. in the destination, three nodes with percona cluster 5.5 need to be installed and should be remain in stopped state. Ubuntu 14.04 is used in this scenario  here below an example of my.cnf config, all the node must have the same config</description>
+    </item>
+    
+    <item>
+      <title>network manager strongswan in ubuntu 16.04</title>
+      <link>https://ll.tips/llcat.network-manager-strongswan-in-ubuntu-16.04/</link>
+      <pubDate>Sat, 10 Sep 2016 11:31:28 +0200</pubDate>
+      
+      <guid>https://ll.tips/llcat.network-manager-strongswan-in-ubuntu-16.04/</guid>
+      <description>Install prerequisie
+sudo apt-get install gtk+-3.0 libsecret-1-dev libnm-glib-vpn-dev libnm-gtk-dev libnma-dev  Download strongswan plugin
+wget https://download.strongswan.org/NetworkManager/NetworkManager-strongswan-1.4.0.tar.bz2  Extract the packages
+tar -xvjf NetworkManager-strongswan-1.4.0.tar.bz2  Move to the extracted directory
+cd NetworkManager-strongswan-1.4.0/  Configure the installation
+./configure --sysconfdir=/etc --prefix=/usr --libexecdir=/usr/lib  Compile
+make  Install
+sudo make install  </description>
+    </item>
+    
+    <item>
+      <title>pgbench postgresql on ubuntu from scratch</title>
+      <link>https://ll.tips/llcat.pgbench-postgresql-on-ubuntu-from-scratch/</link>
+      <pubDate>Wed, 07 Sep 2016 09:17:15 +0200</pubDate>
+      
+      <guid>https://ll.tips/llcat.pgbench-postgresql-on-ubuntu-from-scratch/</guid>
+      <description>Install postgresql
+sudo apt-get install postgresql  Change to postgres user
+sudo su postgres  Create an empty database
+createdb pgbench  Fill the size of the db with 231MB
+pgbench -i -s 15 pgbench  Check the size
+psql pgbench -c &amp;quot;\l+&amp;quot; | grep pgbench | awk -F &amp;quot;|&amp;quot; &#39;{print $7}&#39;  Read write test
+pgbench -c 4 -j 2 -T 60 pgbench  Read only test
+pgbench -c 4 -j 2 -T 600 -S pgbench  Write only test</description>
+    </item>
+    
+    <item>
+      <title>test internet bandwidth with wget</title>
+      <link>https://ll.tips/llcat.test-internet-bandwidth-with-wget/</link>
+      <pubDate>Sun, 22 May 2016 14:04:22 +0200</pubDate>
+      
+      <guid>https://ll.tips/llcat.test-internet-bandwidth-with-wget/</guid>
+      <description>in europe
+wget -O /dev/null http://speedtest.tele2.net/10GB.zip  </description>
+    </item>
+    
+    <item>
+      <title>manage gnome keyring with gkpass script</title>
+      <link>https://ll.tips/llcat.manage-gnome-keyring-with-gkpass-script/</link>
+      <pubDate>Sun, 08 May 2016 20:02:21 +0200</pubDate>
+      
+      <guid>https://ll.tips/llcat.manage-gnome-keyring-with-gkpass-script/</guid>
+      <description>gkpass require gnome-keyring and python-keyring to work, if you have ansible you can install pre-requisite in agnostic way with the following commands
+ansible 127.0.0.1 -m setup -a &amp;quot;filter=ansible_pkg_mgr&amp;quot; | \ sed &amp;quot;1 s/.*{/{/g&amp;quot; | \ python -c &amp;quot;import json,sys;print json.load(sys.stdin)[&#39;ansible_facts&#39;][&#39;ansible_pkg_mgr&#39;];&amp;quot; | \ sudo xargs -I {} ansible 127.0.0.1 -m package -a &amp;quot;name=python-keyring use={}&amp;quot;  install
+cd ~ git clone https://github.com/jsecchiero/gkpass.git echo &#39;PATH=$PATH:~/gkpass/bin&#39; &amp;gt;&amp;gt; ~/.bashrc . ~/.bashrc  create a new entry</description>
+    </item>
+    
+    <item>
+      <title>translate directly in google chrome omnibox</title>
+      <link>https://ll.tips/llcat.translate-directly-in-google-chrome-omnibox/</link>
+      <pubDate>Thu, 05 May 2016 21:18:51 +0200</pubDate>
+      
+      <guid>https://ll.tips/llcat.translate-directly-in-google-chrome-omnibox/</guid>
+      <description>custom shortcut like tren allow you to translate on the fly to english directly in the omnibox without any plugin.
+go to Settings, Manage search engines&amp;hellip; and add custom entry in Other search engines.
+   name&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp; shortcut url     to english tren https://translate.google.it/?ie=UTF-8&amp;amp;hl=en&amp;amp;client=tw-ob#auto/en/%s    more shortcuts here</description>
+    </item>
+    
+    <item>
+      <title>google chrome clear dns cache</title>
+      <link>https://ll.tips/llcat.google-chrome-clear-dns-cache/</link>
+      <pubDate>Sat, 30 Apr 2016 17:38:57 +0200</pubDate>
+      
+      <guid>https://ll.tips/llcat.google-chrome-clear-dns-cache/</guid>
+      <description>In the omnibar write
+chrome://net-internals/#dns  and click on &amp;ldquo;Clear host cache&amp;rdquo; button</description>
+    </item>
+    
+    <item>
+      <title>show special characters in vi</title>
+      <link>https://ll.tips/llcat.show-special-characters-in-vi/</link>
+      <pubDate>Tue, 26 Apr 2016 15:36:34 +0200</pubDate>
+      
+      <guid>https://ll.tips/llcat.show-special-characters-in-vi/</guid>
+      <description>set list  disable
+set nolist  </description>
+    </item>
+    
+    <item>
+      <title>install a missing command using suggestions</title>
+      <link>https://ll.tips/llcat.install-a-missing-command-using-suggestions/</link>
+      <pubDate>Thu, 24 Mar 2016 13:02:44 +0100</pubDate>
+      
+      <guid>https://ll.tips/llcat.install-a-missing-command-using-suggestions/</guid>
+      <description>prefix 2&amp;gt;&amp;amp;1 | tail -n1 | sh  Suggestion in terminal about of a missing command are genereted by command-not-found and command-not-found-data. The output in ubuntu is this:
+$ apt-get install MISSING The program &#39;MISSING&#39; is currently not installed. You can install it by typing: sudo apt-get install MISSING  </description>
+    </item>
+    
+    <item>
+      <title>redirect stderr and stdout command to vi</title>
+      <link>https://ll.tips/llcat.redirect-stderr-and-stdout-command-to-vi/</link>
+      <pubDate>Thu, 24 Mar 2016 12:09:16 +0100</pubDate>
+      
+      <guid>https://ll.tips/llcat.redirect-stderr-and-stdout-command-to-vi/</guid>
+      <description>vi &amp;lt;(cat error 2&amp;gt;&amp;amp;1)  </description>
+    </item>
+    
+    <item>
+      <title>google chrome omnibox custom shortcuts</title>
+      <link>https://ll.tips/llcat.google-chrome-omnibox-custom-shortcut/</link>
+      <pubDate>Mon, 07 Mar 2016 23:38:07 +0100</pubDate>
+      
+      <guid>https://ll.tips/llcat.google-chrome-omnibox-custom-shortcut/</guid>
+      <description>go to Settings, Manage search engines&amp;hellip; and add custom entry in Other search engines. here below a few examples:
+   name&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp; shortcut url     it it http://www.google.it/search?q=%s   com com https://encrypted.google.com/search?q=%s   video vid http://www.bing.com/videos/search?q=%s   gmail gmail https://mail.google.com/mail/u/0/#inbox   images img https://www.google.com/search?tbm=isch&amp;amp;hl=en&amp;amp;source=hp&amp;amp;biw=1920&amp;amp;bih=917&amp;amp;q=%s&amp;amp;gbv=2&amp;amp;oq=&amp;amp;aq=&amp;amp;aqi=&amp;amp;aql=&amp;amp;gs_sm=&amp;amp;gs_upl=   to english tren https://translate.google.it/?ie=UTF-8&amp;amp;hl=en&amp;amp;client=tw-ob#auto/en/%s   to italian trit https://translate.google.it/?ie=UTF-8&amp;amp;hl=en&amp;amp;client=tw-ob#auto/it/%s   luck &amp;gt; http://www.google.com/search?q=%s&amp;amp;btnI=Im+Feeling+Lucky   youtube yt https://www.</description>
+    </item>
+    
+    <item>
+      <title>exit with a error from vi</title>
+      <link>https://ll.tips/llcat.exit-with-a-error-from-vi/</link>
+      <pubDate>Sun, 06 Mar 2016 18:32:48 +0100</pubDate>
+      
+      <guid>https://ll.tips/llcat.exit-with-a-error-from-vi/</guid>
+      <description>:cq  This is helpful for:
+ in shell vi mode after a ESC + v you can quit without execute the command in git during a commit you can stop the operation  </description>
+    </item>
+    
+    <item>
+      <title>prefix your shell command</title>
+      <link>https://ll.tips/llcat.prefix-your-shell-command/</link>
+      <pubDate>Wed, 24 Feb 2016 22:30:38 +0100</pubDate>
+      
+      <guid>https://ll.tips/llcat.prefix-your-shell-command/</guid>
+      <description>cd ~ git clone https://github.com/jsecchiero/bash-prefix.git echo &#39;PATH=$PATH:~/bash-prefix/bin&#39; &amp;gt;&amp;gt; ~/.bashrc . ~/.bashrc  </description>
+    </item>
+    
+    <item>
+      <title>../</title>
+      <link>https://ll.tips/llcat.../</link>
+      <pubDate>Wed, 24 Feb 2016 22:30:01 +0100</pubDate>
+      
+      <guid>https://ll.tips/llcat.../</guid>
+      <description>cat: tips/../: Is a directory</description>
+    </item>
+    
+    <item>
+      <title>./</title>
+      <link>https://ll.tips/llcat../</link>
+      <pubDate>Wed, 24 Feb 2016 22:30:00 +0100</pubDate>
+      
+      <guid>https://ll.tips/llcat../</guid>
+      <description>cat: tips/./: Is a directory</description>
+    </item>
+    
+  </channel>
+</rss>
